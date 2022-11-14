@@ -2,3 +2,6 @@
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>
+
+<%= link_to 'new workout', new_workout_path %>
+<%= link_to 'see workouts', workouts_path %>

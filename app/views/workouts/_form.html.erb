@@ -1,0 +1,8 @@
+<h1>Workout Form</h1>
+
+<%= form_tag workouts_path do %>
+  <label>Name:</label><br>
+  <%= text_field_tag name="workout[name]" %><br>
+
+  <%= submit_tag "Submit workout" %>
+<% end %>
