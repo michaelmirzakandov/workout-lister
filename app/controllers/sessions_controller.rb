@@ -15,6 +15,20 @@ class SessionsController < ApplicationController
   
       redirect_to controller: 'welcome', action: 'home'
     end
+
+    def omniauth
+      user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid]) do |u|
+        u.name = request.env['omniauth.auth'][:info][:name]
+        u.password = SecureRandom.hex(15)
+      end
+      if user.valid?
+        session[:user_id] = user.id
+        @user = user
+        redirect_to controller: 'welcome', action: 'home'
+      else
+        redirect_to '/'
+      end        
+    end
   
     def destroy
       session.delete :user_id
