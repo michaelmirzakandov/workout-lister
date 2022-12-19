@@ -1,7 +1,9 @@
 <h1><%= @workout.name %></h1>
 <%= link_to "New Exerceise", new_workout_exercise_path(@workout) %>
+<%= link_to "Edit Workout", edit_workout_path(@workout) %>
+<%= link_to "Delete Workout", workout_path(@workout), method: :delete %>
 
 <p>Exercises:</p>
 <% @workout.exercises.each do |exercise| %>
-  <div><%= exercise.name %></div>
+  <div><%= exercise.name %><%= link_to "Edit", edit_exercise_path(exercise) %> <%= link_to "Delete", exercise_path(exercise), method: :delete %></div>
 <% end %>

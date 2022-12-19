@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   post '/logout' => 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth' 
 
-  resources :users, only: [:new, :create]
-  resources :workouts, only: [:index, :show, :create, :new] do
-    resources :exercises, only: [:show, :index, :new, :edit ]
+  resources :users
+  resources :workouts do
+    resources :exercises
   end
   resources :exercises
 
