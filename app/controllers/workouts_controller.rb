@@ -8,10 +8,11 @@ class WorkoutsController < ApplicationController
     end
 
     def new
+        @workout = Workout.new
     end
 
     def create
-        @workout = Workout.create(name: params[:workout][:name]) 
+        @workout = Workout.create(workout_params) 
         @workout[:user_id] = current_user.id
         @workout.save
         redirect_to workouts_path
@@ -22,5 +23,11 @@ class WorkoutsController < ApplicationController
         @workout = Workout.find(params[:id])
         @workout.destroy
           redirect_to root_path
-        end
+    end
+
+    private
+    
+    def workout_params
+        params.require(:workout).permit(:name)
+      end
 end
