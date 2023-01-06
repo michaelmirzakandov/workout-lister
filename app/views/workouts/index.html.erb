@@ -1,3 +1,4 @@
 <% @workouts.newest_first.each do |workout| %>
     <div><%= link_to "show #{workout.name}", workout_path(workout) %></div>
   <% end %>
+  

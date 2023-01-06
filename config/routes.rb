@@ -4,11 +4,19 @@ Rails.application.routes.draw do
   post '/logout' => 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth' 
 
-  resources :users
-  resources :workouts do
+  Rails.application.routes.draw do
+    resources :users do
+      resources :exercises
+    end
+    resources :users do
+      resources :workouts
+    end
+    resources :workouts do 
+      resources :workout_exercises
+    end
     resources :exercises
   end
-  resources :exercises
+  
 
   root 'welcome#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

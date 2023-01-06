@@ -1,54 +1,46 @@
 class ExercisesController < ApplicationController
-    def new
-        if params[:workout_id] && !Workout.exists?(params[:workout_id])
-            redirect_to workouts_path, alert: "workout not found."
-          else
-            @exercise = Exercise.new(workout_id: params[:workout_id])
-          end
-    end
 
-    def update
-        @exercise = Exercise.find(params[:id])
-        @exercise.update(exercise_params)
-        redirect_to exercise_path(@exercise)
-    end
+  # GET /users/:user_id/exercises
+  def index
+    @exercises = @user.exercises
+  end
 
-    def edit
-        if params[:workout_id]
-          workout = Workout.find_by(id: params[:workout_id])
-          if workout.nil?
-            redirect_to workouts_path, alert: "workout not found."
-          else
-            @exercise = workout.exercises.find_by(id: params[:id])
-            redirect_to workout_exercises_path(workout), alert: "exercise not found." if @exercise.nil?
-          end
-        else
-          @exercise = Exercise.find(params[:id])
-        end
-      end
-  
-    def create
-      @exercise = Exercise.new(exercise_params)
-      if @exercise.save
-        redirect_to @exercise
-      else
-        render :new
-      end
-    end
+  # GET /users/:user_id/exercises/:id
+  def show
+    @exercise = Exercise.find(params[:id])
+  end
 
-    def show
-      @exercise = Exercise.find(params[:id])
-    end
+  # GET /users/:user_id/exercises/new
+  def new
+    @exercise = @user.exercises.build
+  end
 
-    def destroy
+  # GET /users/:user_id/exercises/:id/edit
+  def edit
+  end
+
+  # POST /users/:user_id/exercises
+  def create
+    @exercise = @user.exercises.build(exercise_params)
+
+    if @exercise.save
+      redirect_to [@exercise], notice: 'Exercise was successfully created.'
+    else
+      render :new
+    end
+  end
+
+
+  # DELETE /users/:user_id/exercises/:id
+  def destroy
     @exercise = Exercise.find(params[:id])
     @exercise.destroy
-      redirect_to workouts_path
-    end
-    
-    private
+    redirect_to user_exercises_url(@user), notice: 'Exercise was successfully destroyed.'
+  end
+
+  private
 
     def exercise_params
-        params.require(:exercise).permit(:name, :workout_id)
-      end
+      params.require(:exercise).permit(:name)
+    end
 end

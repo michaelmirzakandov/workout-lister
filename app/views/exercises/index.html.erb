@@ -1,0 +1,3 @@
+<% @exercises.each do |exercise| %>
+    <div><%= link_to "show #{exercise.name}", exercise_path(exercise) %></div>
+  <% end %>

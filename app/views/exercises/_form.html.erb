@@ -14,9 +14,8 @@
 <% end %>
 
 <%= form_for(@exercise) do |f| %>
-    <label>Exercise name:</label><br>
-    <%= workout_id_field(@exercise) %>
-    <br>
-    <%= f.text_field :name %><br>
-    <%= f.submit %>
-  <% end %>
+  <label>exercise name:</label><br>
+  <br>
+  <%= f.text_field :name %><br>
+  <%= f.submit %>
+<% end %>

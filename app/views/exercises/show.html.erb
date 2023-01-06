@@ -1,2 +1,3 @@
 <h1><%= @exercise.name %></h1>
-<p>by <%= link_to @exercise.workout.name, workout_path(@exercise.workout) if @exercise.workout %> (<%= link_to "Edit exercise", edit_workout_exercise_path(@exercise.workout, @exercise) if @exercise.workout %>)</p>
+
+<%= link_to "Delete Exercise", exercise_path(@exercise), method: :delete %>

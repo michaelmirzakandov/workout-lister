@@ -1,8 +1,24 @@
 <h1><%= @workout.name %></h1>
-<%= link_to "New Exerceise", new_workout_exercise_path(@workout) %>
+
+<%= link_to "New Workout Exercise", new_workout_workout_exercise_path(@workout) %>
+
 <%= link_to "Delete Workout", workout_path(@workout), method: :delete %>
 
-<p>Exercises:</p>
-<% @workout.exercises.each do |exercise| %>
-  <div><%= exercise.name %><%= link_to "Edit", edit_exercise_path(exercise) %> <%= link_to "Delete", exercise_path(exercise), method: :delete %></div>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Exercise</th>
+      <th>Reps</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workout.workout_exercises.each do |workout_exercise| %>
+      <tr>
+        <td><%= workout_exercise.exercise.name %></td>
+        <td><%= workout_exercise.reps %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
