@@ -1,0 +1,1 @@
+@catagory = Catagory.create(name: "catagory 1")

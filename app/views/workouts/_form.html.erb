@@ -17,5 +17,7 @@
     <label>Workout name:</label><br>
     <br>
     <%= f.text_field :name %><br>
+    <%= f.label :catagory %>
+    <%= f.collection_select :catagory_id, Catagory.all, :id, :name %>
     <%= f.submit %>
   <% end %>
